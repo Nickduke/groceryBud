@@ -20,5 +20,16 @@ function addItem(e) {
   if (value && editFlag === false) {
   } else if (value && editFlag) {
   } else {
+    displayAlert('please enter value', 'danger');
   }
 }
+
+const displayAlert = (text, action) => {
+  alert.textContent = text;
+  alert.classList.add(`alert-${action}`);
+
+  setTimeout(() => {
+    alert.textContent = '';
+    alert.classList.remove(`alert-${action}`);
+  }, 1000);
+};
