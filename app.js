@@ -11,6 +11,7 @@ let editFlag = false;
 let editID = '';
 
 form.addEventListener('submit', addItem);
+clearBtn.addEventListener('click', clearItems);
 
 function addItem(e) {
   e.preventDefault();
@@ -55,10 +56,27 @@ const displayAlert = (text, action) => {
   }, 1000);
 };
 
+function clearItems() {
+  const items = document.querySelectorAll('.grocery-item');
+
+  if (items.length > 0) {
+    items.forEach((item) => {
+      list.removeChild(item);
+    });
+  }
+  container.classList.remove('show-container');
+  displayAlert('items cleared', 'danger');
+  setBackToDefault();
+  // localStorage.removeItem('list');
+}
+
 const addToLocalStorage = (id, value) => {
   console.log('added to local');
 };
 
 const setBackToDefault = () => {
-  console.log('set to default');
+  grocery.value = '';
+  editFlag = false;
+  editID = '';
+  submit.textContent = 'submit';
 };
