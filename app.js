@@ -106,15 +106,23 @@ function editItem(e) {
   submit.textContent = 'edit';
 }
 
-const addToLocalStorage = (id, value) => {};
-
-const removeFromLocalStorage = (id) => {};
-
-const editLocalStorage = (id, value) => {};
-
 const setBackToDefault = () => {
   grocery.value = '';
   editFlag = false;
   editID = '';
   submit.textContent = 'submit';
 };
+
+const addToLocalStorage = (id, value) => {
+  const grocery = { id, value };
+  let items = localStorage.getItem('list')
+    ? JSON.parse(localStorage.getItem('list'))
+    : [];
+
+  items.push(grocery);
+  localStorage.setItem('list', JSON.stringify(items));
+};
+
+const removeFromLocalStorage = (id) => {};
+
+const editLocalStorage = (id, value) => {};
