@@ -47,6 +47,10 @@ function addItem(e) {
     setBackToDefault();
     container.classList.add('show-container');
   } else if (value && editFlag) {
+    editElement.innerHTML = value;
+    displayAlert('item successfully updated', 'success');
+    editLocalStorage(editID, value);
+    setBackToDefault();
   } else {
     displayAlert('please enter value', 'danger');
   }
@@ -91,13 +95,22 @@ function deleteItem(e) {
   removeFromLocalStorage(id);
 }
 
-function editItem() {
-  console.log('item edited');
+function editItem(e) {
+  const element = e.currentTarget.parentElement.parentElement;
+
+  editElement = e.currentTarget.parentElement.previousElementSibling;
+
+  grocery.value = editElement.innerHTML;
+  editFlag = true;
+  editID = element.dataset.id;
+  submit.textContent = 'edit';
 }
 
 const addToLocalStorage = (id, value) => {};
 
 const removeFromLocalStorage = (id) => {};
+
+const editLocalStorage = (id, value) => {};
 
 const setBackToDefault = () => {
   grocery.value = '';
