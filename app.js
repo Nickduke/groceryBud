@@ -34,6 +34,12 @@ function addItem(e) {
               </button>
             </div>`;
 
+    const deleteBtn = element.querySelector('.delete-btn');
+    const editBtn = element.querySelector('.edit-btn');
+
+    deleteBtn.addEventListener('click', deleteItem);
+    editBtn.addEventListener('click', editItem);
+
     list.appendChild(element);
     displayAlert('item added to list', 'success');
 
@@ -70,9 +76,28 @@ function clearItems() {
   // localStorage.removeItem('list');
 }
 
-const addToLocalStorage = (id, value) => {
-  console.log('added to local');
-};
+function deleteItem(e) {
+  const element = e.currentTarget.parentElement.parentElement;
+  const id = element.dataset.id;
+
+  list.removeChild(element);
+
+  if (list.children.length === 0) {
+    container.classList.remove('.show-container');
+  }
+  displayAlert('item removed', 'danger');
+  setBackToDefault();
+
+  removeFromLocalStorage(id);
+}
+
+function editItem() {
+  console.log('item edited');
+}
+
+const addToLocalStorage = (id, value) => {};
+
+const removeFromLocalStorage = (id) => {};
 
 const setBackToDefault = () => {
   grocery.value = '';
